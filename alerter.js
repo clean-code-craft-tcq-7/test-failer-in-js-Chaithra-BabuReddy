@@ -1,3 +1,5 @@
+const {expect} = require('chai');
+
 let alertFailureCount = 0;
 
 function networkAlertStub(celcius) {
@@ -5,7 +7,7 @@ function networkAlertStub(celcius) {
     // Return 200 for ok
     // Return 500 for not-ok
     // stub always succeeds and returns 200
-    return 200;
+    return 500;
 }
 
 function alertInCelcius(farenheit) {
@@ -22,5 +24,6 @@ function alertInCelcius(farenheit) {
 
 alertInCelcius(400.5);
 alertInCelcius(303.6);
+expect(alertFailureCount).to.be.above(0);
 console.log(`${alertFailureCount} alerts failed.`);
 console.log('All is well (maybe!)');
