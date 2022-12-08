@@ -1,26 +1,23 @@
-let alertFailureCount = 0;
+export let alertFailureCount = 0;
+export const threshold = 37;
 
-function networkAlertStub(celcius) {
+export function networkAlert(celcius) {
     console.log(`Alert! Temperature is ${celcius} degrees`);
-    // Return 200 for ok
-    // Return 500 for not-ok
-    // stub always succeeds and returns 200
-    return 200;
+     if (celcius < threshold) {
+        return 200;
+    } else {
+        return 500;
+    }
 }
 
-function alertInCelcius(farenheit) {
+export function alertInCelcius(farenheit, networkAlertFun) {
     const celcius = (farenheit - 32) * 5 / 9;
-    const returnCode = networkAlertStub(celcius);
+    const returnCode = networkAlertFun(celcius);
     if (returnCode != 200) {
         // non-ok response is not an error! Issues happen in life!
         // let us keep a count of failures to report
         // However, this code doesn't count failures!
         // Add a test below to catch this bug. Alter the stub above, if needed.
-        alertFailureCount += 0;
+        alertFailureCount += 1;
     }
 }
-
-alertInCelcius(400.5);
-alertInCelcius(303.6);
-console.log(`${alertFailureCount} alerts failed.`);
-console.log('All is well (maybe!)');

@@ -1,16 +1,33 @@
-const {expect} = require('chai')
-
-function print_color_map() {
-    const majorColors = ["White", "Red", "Black", "Yellow", "Violet"];
-    const minorColors = ["Blue", "Orange", "Green", "Brown", "Slate"];
+const majorColors = ["White", "Red", "Black", "Yellow", "Violet"];
+const minorColors = ["Blue", "Orange", "Green", "Brown", "Slate"];
+const longestMajorColorLen=7;
+export function createColorMap() {
+    let arr = [];
     for (let i = 0; i < majorColors.length; i++) {
         for (let j = 0; j < minorColors.length; j++) {
-            console.log(`${i * 5 + j} | ${majorColors[i]} | ${minorColors[j]}`);
+            let a = formatColorMap(i * 5 + j + 1, majorColors[i], minorColors[j])
+            arr.push(a);
         }
     }
-    return majorColors.length * minorColors.length;
+    return arr;
+}
+export function formatColorMap(pairNo, majorColor, minorColor) {
+    let str;
+    str = (pairNo < 10) ? (pairNo + '  | ' + majorColor) : (pairNo + ' | ' + majorColor)
+    for (let i = 0; i < longestMajorColorLen - majorColor.length; i++) {
+        str = str + " ";
+    }
+    str = str + '| ' + minorColor;
+    return str;
 }
 
-result = print_color_map();
-expect(result).equals(25);
-console.log('All is well (maybe!)');
+function print_color_map() {
+    let colorMap = createColorMap();
+    let refColorCodeManual = '';
+    colorMap.forEach((formattedStr) => {
+        refColorCodeManual = refColorCodeManual + formattedStr + '\n'
+    })
+    console.log(refColorCodeManual)
+}
+print_color_map();
+
