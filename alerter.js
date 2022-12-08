@@ -1,8 +1,13 @@
 export let alertFailureCount = 0;
 export const threshold = 37;
 
-function networkAlert(celcius) {
+export function networkAlert(celcius) {
     console.log(`Alert! Temperature is ${celcius} degrees`);
+     if (celcius < threshold) {
+        return 200;
+    } else {
+        return 500;
+    }
 }
 
 export function alertInCelcius(farenheit, networkAlertFun) {

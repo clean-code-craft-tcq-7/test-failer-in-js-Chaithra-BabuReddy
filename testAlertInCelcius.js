@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { alertFailureCount, threshold,alertInCelcius } from './alerter.js';
+import { alertFailureCount, threshold, alertInCelcius, networkAlert } from './alerter.js';
 let networkAlertStub = function (celcius) {
     console.log(`Alert! Temperature is ${celcius} degrees from stub`);
     if (celcius < threshold) {
@@ -15,3 +15,5 @@ alertInCelcius(100, networkAlertStub);
 expect(alertFailureCount).to.be.equals(1);
 alertInCelcius(105, networkAlertStub);
 expect(alertFailureCount).to.be.equals(2);
+let result = networkAlert(35);
+expect(result).to.be.equal(200);

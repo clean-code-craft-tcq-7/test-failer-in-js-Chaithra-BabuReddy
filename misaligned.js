@@ -1,6 +1,6 @@
 const majorColors = ["White", "Red", "Black", "Yellow", "Violet"];
 const minorColors = ["Blue", "Orange", "Green", "Brown", "Slate"];
-const maxMajorColorindex=7;
+const longestMajorColorLen=7;
 export function createColorMap() {
     let arr = [];
     for (let i = 0; i < majorColors.length; i++) {
@@ -14,7 +14,7 @@ export function createColorMap() {
 export function formatColorMap(pairNo, majorColor, minorColor) {
     let str;
     str = (pairNo < 10) ? (pairNo + '  | ' + majorColor) : (pairNo + ' | ' + majorColor)
-    for (let i = 0; i < maxMajorColorindex - majorColor.length; i++) {
+    for (let i = 0; i < longestMajorColorLen - majorColor.length; i++) {
         str = str + " ";
     }
     str = str + '| ' + minorColor;
